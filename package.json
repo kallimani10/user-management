@@ -1,0 +1,32 @@
+{
+  "name": "user-management",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/kallimani10/user-management#readme",
+  "bugs": {
+    "url": "https://github.com/kallimani10/user-management/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kallimani10/user-management.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.17.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
