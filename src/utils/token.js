@@ -8,3 +8,4 @@ exports.generateToken = (user) => {
     { expiresIn: "1d" }
   );
 };
+     

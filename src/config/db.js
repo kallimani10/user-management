@@ -17,4 +17,4 @@ pool.on("error", (err) => {
   console.error("❌ PostgreSQL error:", err.message);
 });
 
-module.exports = pool;
+module.exports = pool;   

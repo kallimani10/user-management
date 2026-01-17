@@ -1,27 +1,62 @@
-const db = require("../config/db");
+"use strict";
 
-exports.createUser = (name, email, password) => {
-  return db.query(
-    "INSERT INTO users (name, email, password) VALUES ($1,$2,$3) RETURNING id,name,email",
-    [name, email, password]
+module.exports = (sequelize, Sequelize) => {
+  const PracticeUser = sequelize.define(
+    "PracticeUser",
+    {
+      id: {
+        type: Sequelize.BIGINT,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+
+      // 🔹 Basic Credentials
+      username: {
+        type: Sequelize.STRING(100),
+        allowNull: false,
+        unique: true,
+      },
+      email: {
+        type: Sequelize.STRING(150),
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
+      // 🔹 Status Flags
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
+      },
+      isDeleted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+    },
+    {
+      tableName: "practiceusers",
+      timestamps: true, // Sequelize will manage createdAt & updatedAt
+
+      indexes: [
+        {
+          unique: true,
+          fields: ["email"],
+        },
+        {
+          unique: true,
+          fields: ["username"],
+        },
+        {
+          fields: ["isDeleted"],
+        },
+      ],
+    }
   );
-};
 
-exports.findByEmail = (email) => {
-  return db.query("SELECT * FROM users WHERE email=$1", [email]);
-};
-
-exports.getAllUsers = () => {
-  return db.query("SELECT id,name,email FROM users");
-};
-
-exports.updateUser = (id, name) => {
-  return db.query(
-    "UPDATE users SET name=$1 WHERE id=$2 RETURNING id,name,email",
-    [name, id]
-  );
-};
-
-exports.deleteUser = (id) => {
-  return db.query("DELETE FROM users WHERE id=$1", [id]);
+  return PracticeUser;
 };
